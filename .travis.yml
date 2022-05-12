@@ -8,3 +8,15 @@ before_install:
 
 script:
   - docker run -e CI=true xadamus/docker-sandbox npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "docker-sandbox"
+  env: "Dockersandbox-env"
+  bucket_name: "elasticbeanstalk-us-east-1-065516912082"
+  bucket_path: "docker-sandbox"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
