@@ -13,7 +13,7 @@ deploy:
   provider: elasticbeanstalk
   region: "us-east-1"
   app: "docker-sandbox"
-  env: "Dockersandbox-env"
+  env: "dockersandbox-env"
   bucket_name: "elasticbeanstalk-us-east-1-065516912082"
   bucket_path: "docker-sandbox"
   on:
