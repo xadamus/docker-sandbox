@@ -1,0 +1,21 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t xadamus/docker-sandbox -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true xadamus/docker-sandbox npm test
+
+after_success:
+  - docker build -t xadamus/docker-sandbox-client ./client
+  - docker build -t xadamus/docker-sandbox-nginx ./nginx
+  - docker build -t xadamus/docker-sandbox-server ./server
+  - docker build -t xadamus/docker-sandbox-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push xadamus/docker-sandbox-client
+  - docker push xadamus/docker-sandbox-nginx
+  - docker push xadamus/docker-sandbox-server
+  - docker push xadamus/docker-sandbox-worker
