@@ -11,5 +11,5 @@ docker push xadamus/docker-sandbox-worker:$SHA
 
 kubectl apply -f k8s/
 kubectl set image deployments/server-deployment server=xadamus/docker-sandbox-server:$SHA
-kubectl set image deployments/client-deployment server=xadamus/docker-sandbox-client:$SHA
-kubectl set image deployments/worker-deployment server=xadamus/docker-sandbox-worker:$SHA
+kubectl set image deployments/client-deployment client=xadamus/docker-sandbox-client:$SHA
+kubectl set image deployments/worker-deployment worker=xadamus/docker-sandbox-worker:$SHA
